@@ -1,7 +1,8 @@
-# Bank statement parser
+# bank statement parser
 
 quick little script that parses your credit card statement pdf files into a csv file in the format
-(date, description, amount, category)
+`(date, description, amount, category)` so that you can upload them to your google sheet for further
+analysis
 
 to categorise transactions, add your own definition in `config.json` (sample is provided)
 
