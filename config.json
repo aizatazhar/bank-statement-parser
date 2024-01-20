@@ -1,6 +1,8 @@
 {
     "categories": {
         "groceries": ["NTUC FP"],
-        "shopping": ["SHOPEE"]
+        "shopping": ["SHOPEE"],
+        "public transport": ["BUS/MRT"],
+        "private transport": ["grab", "gojek"]
     }
 }
