@@ -10,11 +10,12 @@ def parse_pdf(file_path, categories_map):
         pages += page.extract_text() + "\n"
 
     # Finds transactions in the string and parses them into a list of tuples
-    # (description, amount, category)
+    # (date, description, amount, category)
     lines = pages.split("\n")
     result = []
     for i, line in enumerate(lines):
         if (line.startswith("Ref No.")):
+            date = lines[i-1][:6]
             description = lines[i-1][14:]
             amount = line[33:]
 
@@ -26,7 +27,7 @@ def parse_pdf(file_path, categories_map):
                         category = categoryy
                         break
 
-            result.append((description, amount, category))
+            result.append((date, description, amount, category))
 
     return result
 
