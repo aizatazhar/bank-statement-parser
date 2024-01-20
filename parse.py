@@ -1,6 +1,7 @@
-import argparse
 import csv
 import json
+import glob
+import os
 from pypdf import PdfReader
 
 def parse_pdf(file_path, categories_map):
@@ -32,19 +33,20 @@ def parse_pdf(file_path, categories_map):
 
     return result
 
-def write_csv(tuples, file_name):
-    with open(file_name, "w", newline="") as csv_file:
+def write_csv(tuples, file_path):
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    with open(file_path, "w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["Date", "Description", "Amount", "Category"])
         csv_writer.writerows(tuples)
 
 if __name__ == "__main__":
-    arg_parser = argparse.ArgumentParser(description="Parses credit card statement pdf")
-    arg_parser.add_argument("-f", dest="file_path", required=True, help="The path to the pdf")
-    args = arg_parser.parse_args()
+    pdf_file_paths = glob.glob("data/pdf/*.pdf")
     with open("config.json", "r") as config_file:
         config = json.load(config_file)
- 
-    transactions = parse_pdf(args.file_path, config["categories"])
-
-    write_csv(transactions, f"{args.file_path[:-4]}.csv")
+    
+    for pdf_file_path in pdf_file_paths:
+        pdf_file_name = os.path.basename(pdf_file_path)[:-4]
+        transactions = parse_pdf(pdf_file_path, config["categories"])
+        write_csv(transactions, f"data/csv/{pdf_file_name}.csv")

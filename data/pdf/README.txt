@@ -1,0 +1,1 @@
+Place your bank's credit card statement pdf into this folder
