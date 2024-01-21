@@ -1,1 +1,4 @@
+google_api_python_client==2.114.0
+google_auth_oauthlib==1.2.0
+protobuf==4.25.2
 pypdf==4.0.0

@@ -11,8 +11,8 @@ def parse_pdf(file_path, categories_map):
     for page in reader.pages:
         pages += page.extract_text() + "\n"
 
-    # Finds transactions in the string and parses them into a list of tuples
-    # (date, description, amount, category)
+    # Finds transactions in the string and parses them into a list
+    # [date, description, amount, category]
     lines = pages.split("\n")
     result = []
     for i, line in enumerate(lines):
@@ -29,17 +29,17 @@ def parse_pdf(file_path, categories_map):
                         category = categoryy
                         break
 
-            result.append((date, description, amount, category))
+            result.append([date, description, amount, category])
 
     return result
 
-def write_csv(tuples, file_path):
+def write_csv(rows, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     with open(file_path, "w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["Date", "Description", "Amount", "Category"])
-        csv_writer.writerows(tuples)
+        csv_writer.writerows(rows)
 
 if __name__ == "__main__":
     pdf_file_paths = glob.glob("data/pdf/*.pdf")

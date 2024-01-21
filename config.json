@@ -4,5 +4,6 @@
         "shopping": ["SHOPEE"],
         "public transport": ["BUS/MRT"],
         "private transport": ["grab", "gojek"]
-    }
+    },
+    "google sheet id": "1Avkjy48wcEqG4lGxuMBEo5dS_kNJDfcwK6V3oWGo-Hs"
 }

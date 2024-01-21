@@ -1,3 +1,5 @@
 .vscode
 *.pdf
 *.csv
+credentials.json
+token.json
