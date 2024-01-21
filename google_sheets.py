@@ -89,13 +89,19 @@ def write_values(service, csv_file_paths, spreadsheet_id):
   for response in result["responses"]:
     print(f"{response.get('updatedCells')} cells in {response['updatedRange']} updated.")
 
+  # Move csv files to processed directory
+  for csv_file_path in csv_file_paths:
+    base_name = os.path.basename(csv_file_path)[:-4]
+    dst_path = f"data/csv/processed/{base_name}.csv"
+    os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+    os.rename(csv_file_path, dst_path)
       
 if __name__ == "__main__":
   with open("config.json", "r") as config_file:
     config = json.load(config_file)
 
-  credentials = authorize()
   try:
+    credentials = authorize()
     upload_to_google_sheets(credentials, glob.glob("data/csv/*.csv"), config["google sheets id"])
   except HttpError as error:
     print(error)
