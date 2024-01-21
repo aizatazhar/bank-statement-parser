@@ -96,6 +96,6 @@ if __name__ == "__main__":
 
   credentials = authorize()
   try:
-    upload_to_google_sheets(credentials, glob.glob("data/csv/*.csv"), config["google sheet id"])
+    upload_to_google_sheets(credentials, glob.glob("data/csv/*.csv"), config["google sheets id"])
   except HttpError as error:
     print(error)

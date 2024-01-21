@@ -5,6 +5,8 @@ import os
 from pypdf import PdfReader
 
 def parse_pdf(file_path, categories_map):
+    print(f"Parsing {file_path}")
+
     # Read credit card statement pdf into a string
     reader = PdfReader(file_path)
     pages = ""
@@ -37,6 +39,7 @@ def write_csv(rows, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     with open(file_path, "w", newline="") as csv_file:
+        print(f"Writing {csv_file.name}")
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["Date", "Description", "Amount", "Category"])
         csv_writer.writerows(rows)
